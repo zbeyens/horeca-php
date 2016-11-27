@@ -1,0 +1,30 @@
+
+.b
+{
+	font-size: small;
+}
+
+*
+{
+	font-family: Times New Roman;
+}
+
+.c
+{
+	font-style: italic;
+}
+
+.d
+{
+	font-style: oblique;
+}
+
+.e
+{
+	font-weight: bold;
+}
+
+.f
+{
+	text-decoration: underline;
+}

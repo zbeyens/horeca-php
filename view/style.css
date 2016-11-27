@@ -1,0 +1,916 @@
+@import url('master.css');
+@import url('design/dropdown.css');
+@import url('design/button.css');
+@import url('design/upload.css');
+@import url('design/message-box.css');
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+/* ---------->>> 0.1 FONTS <<<-----------*/
+@font-face {font-family: "paris"; src: url('font/paris.ttf'); }
+@font-face {font-family: "bariol"; src: url('font/bariol.ttf'); }
+@font-face {font-family: "manifesto"; src: url('font/manifesto.ttf'); }
+@font-face {font-family: "kaushan"; src: url('font/kaushan.otf'); }
+
+.marque {font-family: "paris"; }
+.menu, .menu-el, .sous-menu, .menu a, table, p, li, .tags-content {font-family: "bariol"; }
+.titre {font-family: "manifesto"; }
+
+.o-button { 
+	font-family: 'Lato', Calibri, Arial, sans-serif; 
+	font-size: 0.875em;
+	font-weight: bold; 
+}
+table {
+	font-family: 'Open Sans', sans-serif; 
+}
+
+tbody td {font-size: 0.75em; }
+thead td {font-size: 0.7em; font-weight: 600; }
+article {font-size: 1em; }
+.titre {font-size: 1.5em; }
+.reference{ font-size: 0.7em; }
+.menu, .menu-el, .sous-menu, .menu a, .fa-info {font-size: 1.1em; }
+.marque {font-size: 2.8em; }
+
+
+/* ---------->>> 0.2 COLOR & TRANSITION <<<-----------*/
+a { color: lightgray; }
+.s-element p input, .titre, table, p, li, h4, h6 { color: white; }
+.o-button { color: #996319;} /*orange*/
+
+.menu-el a, .sous-menu-el a, .sous-menu-el i, .s-element p input, .s-element p i, .tags i {
+	transition: color .3s ease-in-out; 
+}
+
+.sous-menu-el:hover > i, .poids:hover {
+	color: #ffb347;
+} /*orange clair*/
+
+.s-element p input:hover ~ i, .menu-el:hover > a, .sous-menu-el:hover > a, tbody tr:hover > td i{
+	color: #52cfeb;
+} /*bleu clair*/
+
+.s-element p input:focus ~ i, .tags input:hover ~ i, .tags input:focus ~ i {
+	color: #42A2BC; 
+}
+thead td, tbody td:nth-child(1) {
+	color: #ffb347; 
+}
+
+
+/* ---------->>> 0.3 BACKGROUND <<<-----------*/
+body {
+	background: url("pic/chair.png") fixed center; 
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+header { 
+	background: rgba(0, 0, 0, 0.95)
+}
+.sous-menu-el { 
+	background: rgba(0, 12, 25, .9);
+}
+article, .tags, .infos { 
+	background: rgba(0, 12, 25, .75);
+}
+.s-element p input { 
+	background-color: rgba(43, 43, 43, 0.5);
+}
+.s-element p input:focus { 
+	background-color: rgba(43, 43, 43, 0.7);
+}
+.o-button {
+	background: linear-gradient(#fbd568, #ffb347);
+}
+table {
+	background: #012B39;
+}
+tbody tr:hover {
+	background: #014055;
+}
+
+/* ---------->>> 0.4 DISPLAY & STYLE <<<-----------*/
+section, .o-button, .s-element p {
+	display: flex;
+}
+
+.menu {
+	width: 83%;
+	height : 94%;
+	float: left;
+}
+
+.menu-el, .menu-el a, .sous-menu-el a { /*inline : display horizontal, -block pour avoir width et height*/
+	display: inline-block;
+	vertical-align: middle;
+}
+
+article {
+	justify-content: space-between; /*recouvre tout le container*/
+	align-items: center; /*alignement dans l'axe secondaire (horizontal)*/
+}
+section {
+	justify-content: center;
+}
+.titre, .o-button{
+	text-align: center;
+}
+table {
+	text-align: left;
+}
+ul, li { /*.menu, .menu-el, .sous-menu, .sous-menu-el, .menu a*/
+	list-style: none;
+}
+a { text-decoration: none !important; 
+	cursor: pointer
+}
+/* ---------->>> 1. HEADER <<<-----------*/
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+header {
+	height: 10%;
+	width: 100%;
+}
+
+.marque {
+	width: 16%;
+	height: 94%;
+	padding: 0.3% 0.1%;
+	text-align: right;
+	float: right;
+}
+
+.marque span {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.marque span.lightblue {
+	color: #ffb347;
+}
+
+/* ---------->>> 1.1.* MENU-EL <<<-----------*/
+.menu-el {
+	position: relative;
+	padding: 1.7% 1.8%;
+}
+
+/* ---------->>> 1.1.*.1 SOUS-MENU <<<-----------*/
+.sous-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.2s ease .1s;
+}
+
+.menu-el:hover .sous-menu { /*!!!*/
+	visibility: visible;
+	opacity: 1; 
+}
+
+
+/* ---------->>> 1.1.*.1.* SOUS-MENU-EL <<<-----------*/
+.menu-el a, .sous-menu-el a { /*!!! grossir les boutons*/
+	z-index: 100; /*?*/
+	padding: 14%;
+	margin: -14%;
+}
+
+.sous-menu-el {
+	position: relative;
+	width: 140%;
+}
+
+.sous-menu-el i {
+	position: absolute;
+	top: 20%;
+	left: 6%;
+}
+
+.sous-menu-el a {
+	width: 73%;
+	padding: 2% 0 2% 26%;
+	margin: 0;
+
+	border-bottom: 1px solid #353539;
+}
+
+.sous-menu-el:last-child a { border: none; }
+
+
+/* ---------->>> 2. SECTION <<<-----------*/
+section { width: 97.5%;}
+.s-etablissements, .s-membres, .s-inscription { margin: 1%; height: 85%;}
+.s-rechercher { margin: 2% 1%; height: 77% }
+.s-login { margin: 5% 1%; height: 65%;}
+
+
+/* ---------->>> 2.1 ARTICLES <<<-----------*/
+article {
+	padding: 2% 1.2%;
+	border: 1px solid;
+	border-color: rgba(255,255,255,.4) rgba(60,60,60,.4) rgba(60,60,60,.4) rgba(255,255,255,.4);
+	box-shadow: 4px 4px 6px black;
+}
+
+.s-inscription article {
+	width: 28%;
+	height: 91%;
+}
+
+.g-recaptcha {
+	width: 81%;
+	display: block;
+	margin: 0 auto;
+}
+
+.s-login article {
+	width: 25%;
+	height: 200px;
+}
+
+.s-membres article, .s-etablissements .etablissements {
+	width: 75%;
+}
+
+.s-rechercher article {
+	width: 35%;
+	height: 100%;
+	overflow: auto;
+}
+
+.s-etablissements .fiche-etabl, .s-etablissements .fiche-etabl, .s-etablissements .fiche-membre {
+	width: 99%;
+}
+
+.fiche-etabl, .fiche-membre {
+	padding: 0.6% 0.4%;
+	height: 100%;
+}
+
+.s-etablissements {
+	height: 83%;
+}
+
+.s-etablissements .fiche-edit {
+	width: 50%;
+}
+
+/* ---------->>> 2.1.1 HEADER <<<-----------*/
+.a-header {
+	position: relative;
+}
+
+.titre {
+	padding: 0 0 0.15% 0;
+	margin: 0.5% 0 0.9% 0;
+
+	border-bottom: 1px solid rgba(225, 223, 223, .5);
+}
+
+.reference {
+	position: absolute;
+	top: 16px;
+	left: 0;
+}
+
+.moy {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+
+/* ---------->>> 2.1.2 CORPS LOGIN<<<-----------*/
+.s-element /*En-dessous du titre*/ {
+}
+
+
+/* ---------->>> 2.1.2.*1 FIELDS <<<-----------*/
+.s-element p { 
+	position: relative; /* For the icon positioning */  
+}
+
+
+/* ---------->>> 2.1.2.*1.* ICONES & INPUT <<<-----------*/
+.s-element p i /*Icônes*/ {
+	position: absolute; /*relative au champ texte et pas au input !*/
+	left: 0;
+	top: 0;
+	height: 36px;
+	width: 36px;
+	margin: 5px auto;
+	border-right: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 1px 0 0 rgba(255, 255, 255, 0.7);
+
+	text-align: center;
+	line-height: 42px;
+	pointer-events: none;
+}
+
+.s-element p input {
+	width: 100%;
+	padding: 10px 18px 10px 45px; /*input à droite du icon*/
+	margin: 5px auto;
+
+	border: none;
+	box-shadow: inset 0 0 5px rgba(0,0,0,0.1), inset 0 3px 2px rgba(0,0,0,0.1);
+	border-radius: 3px;
+}
+
+.s-element p input:focus {
+	outline: none;
+}
+
+
+/* ---------->>> 2.1.2.*2.* SUBMIT <<<-----------*/
+.o-button /*Bouton submit*/ {
+	width: 50%;
+	height: 40px;
+	margin: 2% auto;
+
+	box-shadow: inset 0 1px rgba(255,255,255,0.3);
+	border-radius: 3px;
+	border: 1px solid #f4ab4c;
+	text-shadow: 0 1px rgba(255,255,255,0.3);
+	cursor: pointer;
+
+	line-height: 0; /* Same as height */
+}
+
+.o-button:hover {
+	box-shadow: inset 0 1px rgba(255,255,255,0.3), inset 0 20px 40px rgba(255,255,255,0.15);
+}
+
+
+/* ---------->>> 2.2 ETABLISSEMENTS & MEMBRES (TABLES) <<<-----------*/
+table {
+	width: 98%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	box-shadow: 4px 4px 4px black;
+
+}
+
+thead td {
+	padding: 0.6% 0.6%;
+	border-bottom: 1px solid #364043;
+}
+
+tbody td {
+	padding: 0.6% 0.6% 0.6% 0.6%;
+}
+
+.t-horaire tbody td {
+	padding: 0.6% 0.6% 0.6% 1.8%;
+}
+
+.t-horaire tbody td:nth-child(1) {
+	padding: 0.6% 0.6% 0.6% 3.5%;
+}
+
+
+/* ---------->>> RECHERCHER (design/dropdown) <<<-----------*/
+
+/* ---------->>> FICHE D'ETABLISSEMENT<<<-----------*/
+.fiche-container {
+	overflow: auto;
+	height: 92%;
+	width: 100%;
+}
+
+.a-header {
+	width: 100%;
+	height: 99%;
+}
+
+.fiche-membre {
+	height: 100%;
+}
+
+/* ---------->>> FICHE 1/2 <<<-----------*/
+.pictaginfos {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0.05%;
+	width: 59%;
+	height: 99%;
+}
+
+.pictaginfos.visit {
+	border-right: 1px solid rgba(225, 223, 223, .5);
+}
+
+.pictaginfos.visit .poids {
+	margin: 1px 1px;
+}
+
+
+.pictag {
+	display: inline-block;
+	width: 37%;
+	height: 100%;
+	float: left;
+}
+
+.pictag img {
+	padding:1px;
+    border:1px solid #021a40;
+	width: 20vw;
+	height: 20vw;
+}
+
+.pictag.inscription img {
+	border: none;
+}
+
+.s-inscription .titre {
+	margin: 0;
+}
+
+.pictag.inscription {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.pictag.inscription .first {
+	width: 100%;
+	height: 22%;
+}
+
+.pictag.inscription img {
+	position: absolute;
+	top: 0;
+	left: -10%;
+	width: 7vw;
+	height: 7vw;
+}
+
+.pictag.inscription .first .custom-file-input {
+	position: absolute;
+	top: 12%;
+	left: 26%;
+	width: 48%;
+}
+
+.pictag.inscription .second {
+	width: 100%;
+	height: 63%;
+}
+
+.pictag.inscription .second button{
+	margin: 5% auto;
+}
+
+.inscription .s-element {
+	padding: 0;
+}
+
+
+/* ---------->>> TAG <<<-----------*/
+.tags {
+	position: relative;
+	height: 37%;
+	width: 98%;
+	overflow: hidden;
+	border-color: rgba(255,255,255,.7) rgba(60,60,60,.7) rgba(60,60,60,.7) rgba(255,255,255,.7);
+	border-radius: 4px;
+	box-shadow: 4px 4px 3px black;
+}
+
+.tags button, .tags button:active {
+	position: absolute;
+	left: 5px;
+	top: 4px;
+	padding: 0;
+	margin: 0;
+	height: 28px;
+	width: 13%;
+
+}
+
+.tags .dropdown {
+	margin: 0;
+	position: absolute;
+	top: 3px;
+	left: 17%;
+	width: 35%;
+}
+
+.tags .dropdown-select.small {
+	font-size: 10px;
+	padding: 0;
+}
+
+.tags .fa-hashtag.input {
+	position: absolute;
+	z-index: 100;
+	top: 10px;
+	left: 56%;
+}
+
+.tags input {
+	position: absolute;
+	padding-left: 16px;
+	top: 3px;
+	left: 55%;
+	width: 34%;
+	height: 25px;
+}
+
+.tags.visit {
+	overflow: auto;
+	height: 36%;
+	width: 92%;
+	padding: 2%;
+
+}
+
+.tags-content {
+	border-top: 1px solid rgba(225, 223, 223, .5);
+	position: absolute;
+	padding: 2px 0;
+	top: 36px;
+	left: 12px;
+	width: 92%;
+	height: 69%;
+	overflow: auto;
+}
+
+.poids {
+	cursor: pointer;
+}
+
+.infos {
+	position: relative;
+	vertical-align: top;
+
+	overflow: auto;
+	margin: 0 0.5%;
+	padding: 1%;
+	font-size: 0.875em;
+	border-color: rgba(255,255,255,.7) rgba(60,60,60,.7) rgba(60,60,60,.7) rgba(255,255,255,.7);
+	border-radius: 4px;
+	box-shadow: 4px 4px 3px black;
+}
+
+.infos.visit {
+	width: 59%;
+	height: 96%;
+}
+
+.infos table {
+	margin: 1%;
+}
+
+.infos .horaire {
+	border: 1px solid #364043;
+	text-align: left;
+	font-size: 15px;
+}
+
+.infos .horaire.green {
+	color: #00D600;
+}
+
+.infos .horaire.red { 
+	color: red;
+}
+
+
+.infos ul li span{
+	font-weight: 600;
+	color: #ffb347;
+	font-family: "kaushan"
+}
+
+.infos ul li a:hover, .poids a:hover, .comments-list a:hover {
+	text-decoration: underline !important;
+}
+
+.o-button.small { /*petit bouton*/
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	width: 25px;
+	height: 25px;
+}
+
+.o-button.edit {
+	top: 1px;
+	left: 93%;
+}
+
+.o-button.delete {
+	top: 30px;
+	left: 93%;
+}
+
+.o-button.x-small {
+	margin: 0;
+	padding: 0;
+	width: 15px;
+	height: 15px;
+}
+
+.admin {
+	font-family: "manifesto" !important; 
+	color: #52cfeb !important; 
+	text-shadow: 0 0 0.938em #006BD6;
+}
+
+/* ---------->>> CREATE ETABL. <<<-----------*/
+.pictaginfos.edit {
+	width: 100%;
+}
+
+.pictag.edit {
+	width: 41.5%;
+}
+
+.pictag.edit label {
+	width: 100%;
+}
+
+.infos.edit {
+	overflow: auto;
+	width: 55%;
+	height: 96%
+}
+
+.t-form {
+	background-color:rgba(255,255,255,0);
+	box-shadow: none;
+}
+
+.t-form tr:hover{
+	background-color:rgba(255,255,255,0);
+}
+
+.t-form input {
+	width: 100%;
+}
+
+.t-form .t-table {
+
+}
+
+.pictag .o-button {
+	margin-top: 17%;
+}
+
+/* ---------->>> COMMENTAIRES <<<-----------*/
+/* revoir la source si pb */ 
+.comments {
+	display: inline-block;
+	overflow: auto;
+	height: 98%;
+	width: 40%;
+}
+
+.comments-list {
+	display: inline-block;
+	position: relative;
+	width: 98%;
+}
+
+.comments-list li { /*élément de liste*/
+	margin-bottom: 1%;
+	display: block;
+	position: relative;
+
+}
+
+.comment-main-level {
+	display: flex;
+
+}
+
+.w-comment {
+	min-width: 98%;
+	max-width: 98%;
+	min-height: 50px;
+}
+
+/* ---------->>> AVATAR <<<-----------*/
+.comments-list .comment-avatar {
+	width: 5vw;
+	height: 5vw;
+	overflow: hidden;
+	position: relative;
+	z-index: 99;
+
+	background-size: contain;
+	border: 2px solid white;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 1px 10px rgba(0,0,0,0.2);
+	box-shadow: 0 1px 10px rgba(0,0,0,0.2);
+}
+
+.comments-list .comment-avatar img {
+	width: 100%;
+	height: 100%;
+}
+
+.line {
+	border-bottom: 1px solid rgba(225, 223, 223, .5);
+	margin: 5px;
+}
+
+/* ---------->>> BOX COMMENTAIRES <<<-----------*/
+.comments-list .comment-box {
+	margin: 0px 0 0 15px;
+	position: relative;
+	width: 82%;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+
+.comments-list .comment-box:before, .comments-list .comment-box:after { /*arrow*/
+	content: '';
+	position: absolute;
+	display: block;
+	border-width: 10px 12px 10px 0; 
+	border-style: solid;
+	border-color: transparent #FCFCFC;
+	top: 8px;
+	left: -11px;
+}
+
+.comment-box .comment-head {
+	display: flex;
+	background: #FCFCFC;
+	padding: 5px 8px;
+	width: 94%;
+	border-bottom: 1px solid #E5E5E5;
+	overflow: hidden;
+	border-radius: 4px 4px 0 0;
+}
+
+
+/* ---------->>> STARS RADIO & STARS I <<<-----------*/
+.comment-head .stars {
+	align-items: center;
+	width: 100%;
+}
+
+.comment-head .stars.write {
+	width: 80px;
+	margin-right: 2%;
+}
+
+.thumbs i.fa-star { /*com posté*/
+	margin-right: 10px;
+	content: '\f005';
+	color: #FD4;
+	transition: all .2s;
+}
+
+.a-header .moy i { /*moyenne */
+	color: #FE7;
+	text-shadow: 0 0 15px #FBEC1C;
+}
+
+.required input {
+   padding-right: 25px;
+   background-image: url(pic/miyu.png);
+   background-position: right top;
+}
+
+input.star {
+	display: none;
+}/*undisplay les radio button*/
+
+label.star {
+	float: right;
+	color: #444;
+	transition: all .1s;
+}
+
+ input.star:checked ~ label.star:before {
+  	content: '\f005';
+  	color: #FD4;
+  	transition: all .25s;
+ }
+
+ #star-5:checked ~ label.star:before {
+  	color: #FE7;
+  	text-shadow: 0 0 20px #FBEC1C;
+  	content: '\f005';
+  	color: #FD4;
+  	transition: all .25s;
+ }
+
+ #star-1:checked ~ label.star:before { color: #F62; }
+
+ label.star:hover { transform: rotate(-15deg) scale(1.3); }
+
+ label.star:before { /*étoile grise*/
+  	content: '\f006';
+  	font-family: FontAwesome;
+ }
+
+
+
+/* ---------->>> THUMBS <<<-----------*/
+.comment-head .thumbs {
+	width: 15%;
+	margin: 0 4%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.comment-head .fa-thumbs-up, .comment-head .fa-thumbs-down {
+	color: #A6A6A6;
+	margin: 0 5%;
+	cursor: pointer;
+	transition: color 0.3s ease;
+}
+
+.fa-thumbs-up:hover {
+	color: #0EAF02;
+}
+.fa-thumbs-down:hover {
+	color: red;
+}
+
+
+/* ---------->>> NAME & DATE <<<-----------*/
+.comment-box .comment-name {
+	color: #283035;
+	font-size: 0.875em;
+	font-weight: 700;
+	margin-right: 3%;
+}
+
+.comment-box .comment-name a {
+	color: #283035;
+}
+
+.comment-box .comment-name a:hover {
+	text-decoration: underline !important;
+}
+
+.comment-box .comment-head span {
+	color: #999;
+	font-size: 0.813em;
+	position: relative;
+	top: 1px;
+}
+
+.comment-box .comment-head .c-date {
+	flex: 2;
+}
+
+.comment-box .comment-content {
+	width: 94%;
+	padding: 5px 8px;
+	background: #FFF;
+	font-size: 0.813em;
+	color: #595959;
+	border-radius: 0 0 4px 4px;
+}
+
+
+.comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
+
+.comment-box .comment-name.by-author:after {
+	content: 'vous';
+	background: #03658c;
+	color: #FFF;
+	font-size: 0.750em;
+	padding: 3px 5px;
+	font-weight: 700;
+	margin-left: 10px;
+	border-radius: 3px;
+}
+
+
+/* ---------->>> CONFIRMATION <<<-----------*/
+.afterinscription {
+	overflow: auto;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.afterinscription p a {
+	color: #52cfeb !important;
+}
+
+.afterinscription p a:hover {
+	text-decoration: underline !important;
+}
+
+.dropText {
+	margin: 2%;
+}
